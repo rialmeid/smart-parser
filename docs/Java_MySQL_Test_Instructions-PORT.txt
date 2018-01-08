@@ -1,0 +1,67 @@
+O objetivo é escrever um analisador em Java que analisa o arquivo de log de acesso do servidor web, carrega o log para o MySQL e verifica se um determinado IP faz mais do que um certo número de solicitações para a determinada duração.
+
+Java
+----
+
+(1) Crie uma ferramenta java que pode analisar e carregar o arquivo de log fornecido para o MySQL. O delimitador do arquivo de log é pipe (|)
+
+(2) A ferramenta leva "startDate", "duration" e "threshold" como argumentos de linha de comando. "StartDate" é do formato "yyyy-MM-dd.HH: mm: ss", "duração" pode levar apenas "por hora", "diariamente" como entradas e "limiar" pode ser um número inteiro.
+
+(3) É assim que a ferramenta funciona:
+
+    java -cp "parser.jar" com.ef.Parser --startDate = 2017-01-01.13: 00: 00 --duration = hourly --threshold = 100
+
+A ferramenta encontrará todos os IPs que fizeram mais de 100 solicitações a partir de 2017-01-01.13: 00: 00 a 2017-01-01.14: 00: 00 (uma hora) e imprimi-los para consola E também carregá-los para outra tabela MySQL com comentários sobre por que está bloqueado.
+
+java -cp "parser.jar" com.ef.Parser --startDate = 2017-01-01.13: 00: 00 --duration = diariamente - limite = 250
+
+A ferramenta encontrará todos os IPs que fizeram mais de 250 solicitações a partir de 2017-01-01.13: 00: 00 a 2017-01-02.13: 00: 00 (24 horas) e imprimi-los para consola E também carregá-los para outra tabela MySQL com comentários sobre por que está bloqueado.
+
+
+SQL
+---
+
+(1) Escreva a consulta do MySQL para encontrar IPs que façam mais de um certo número de solicitações para um determinado período de tempo.
+
+    Ex: escreva SQL para encontrar IPs que fizeram mais de 100 pedidos a partir de 2017-01-01.13: 00: 00 a 2017-01-01.14: 00: 00.
+
+(2) Escreva a consulta do MySQL para encontrar pedidos feitos por um determinado IP.
+ 
+
+Formato LOG
+----------
+Data, IP, Solicitação, Status, Agente de Usuário (delimitado por tubo, abra o arquivo de exemplo no editor de texto)
+
+Formato da data: "aaaa-MM-dd HH: mm: ss.SSS"
+
+Além disso, encontre anexado um arquivo de log para sua referência.
+
+O arquivo de log assume 200 como limite horário e 500 como limite diário, o que significa:
+
+(1)
+Quando você executa o analisador desse arquivo com os seguintes parâmetros
+
+java -cp "parser.jar" com.ef.Parser --startDate = 2017-01-01.15: 00: 00 --duration = hourly --threshold = 200
+
+A saída terá 192.168.11.231. Se você abrir o arquivo de log, 192.168.11.231 tem 200 ou mais pedidos entre 2017-01-01.15: 00: 00 e 2017-01-01.15: 59: 59
+
+(2)
+Quando você executa o analisador desse arquivo com os seguintes parâmetros
+
+java -cp "parser.jar" com.ef.Parser --startDate = 2017-01-01.00: 00: 00 --duration = diariamente - limite = 500
+
+A saída terá 192.168.102.136. Se você abrir o arquivo de log, 192.168.102.136 tem 500 ou mais pedidos entre 2017-01-01.00: 00: 00 e 2017-01-01.23: 59: 59
+
+
+Entregáveis
+------------
+
+(1) Programa Java que pode ser executado a partir da linha de comando
+
+    java -cp "parser.jar" com.ef.Parser --accesslog = / caminho / para / arquivo --startDate = 2017-01-01.13: 00: 00 --duration = hourly --threshold = 100
+
+(2) Código fonte para o programa Java
+
+(3) Esquema MySQL usado para os dados do registro
+
+(4) consultas SQL para teste SQL
