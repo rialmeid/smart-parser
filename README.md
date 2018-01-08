@@ -1,4 +1,4 @@
-# Smart Parser
+## Smart Parser [![Build Status](https://travis-ci.org/rialmeid/smart-parser)](https://travis-ci.org/rialmeid/smart-parser)
 This project contains the source code of Smart Parser
 
 ### Frameworks used
