@@ -1,3 +1,9 @@
-{
-  language: java
-}
+language: java
+deploy:
+  provider: heroku
+  api_key: "63f3a1b2-2849-4a51-b2f7-963070462f10"
+  app: blooming-citadel-5041
+before_script:
+  - pip install --user codecov
+after_success:
+  - codecov
