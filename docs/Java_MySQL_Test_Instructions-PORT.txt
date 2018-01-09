@@ -1,32 +1,40 @@
-O objetivo é escrever um analisador em Java que analisa o arquivo de log de acesso do servidor web, carrega o log para o MySQL e verifica se um determinado IP faz mais do que um certo número de solicitações para a determinada duração.
+O objetivo é escrever um analisador em Java que analisa o arquivo de log de acesso do servidor web,
+carrega o log para o MySQL
+e verifica se um determinado IP faz mais do que um certo número de solicitações para a determinada duração.
 
 Java
 ----
 
-(1) Crie uma ferramenta java que pode analisar e carregar o arquivo de log fornecido para o MySQL. O delimitador do arquivo de log é pipe (|)
+(1) Crie uma ferramenta java que pode analisar
+e carregar o arquivo de log fornecido para o MySQL.
 
-(2) A ferramenta leva "startDate", "duration" e "threshold" como argumentos de linha de comando. "StartDate" é do formato "yyyy-MM-dd.HH: mm: ss", "duração" pode levar apenas "por hora", "diariamente" como entradas e "limiar" pode ser um número inteiro.
+O delimitador do arquivo de log é pipe (|)
+
+(2) A ferramenta leva "startDate", "duration" e "threshold" como argumentos de linha de comando.
+"StartDate" é do formato "yyyy-MM-dd.HH: mm: ss",
+"duração" pode levar apenas "por hora", "diariamente" como entradas e "limiar" pode ser um número inteiro.
 
 (3) É assim que a ferramenta funciona:
 
     java -cp "parser.jar" com.ef.Parser --startDate = 2017-01-01.13: 00: 00 --duration = hourly --threshold = 100
 
-A ferramenta encontrará todos os IPs que fizeram mais de 100 solicitações a partir de 2017-01-01.13: 00: 00 a 2017-01-01.14: 00: 00 (uma hora) e imprimi-los para consola E também carregá-los para outra tabela MySQL com comentários sobre por que está bloqueado.
+A ferramenta encontrará todos os IPs que fizeram mais de 100 solicitações a partir de 2017-01-01.13: 00: 00 a 2017-01-01.14: 00: 00 (uma hora)
+e imprimi-los para consola
+E também carregá-los para outra tabela MySQL com comentários sobre por que está bloqueado.
 
 java -cp "parser.jar" com.ef.Parser --startDate = 2017-01-01.13: 00: 00 --duration = diariamente - limite = 250
 
-A ferramenta encontrará todos os IPs que fizeram mais de 250 solicitações a partir de 2017-01-01.13: 00: 00 a 2017-01-02.13: 00: 00 (24 horas) e imprimi-los para consola E também carregá-los para outra tabela MySQL com comentários sobre por que está bloqueado.
-
+A ferramenta encontrará todos os IPs que fizeram mais de 250 solicitações a partir de 2017-01-01.13: 00: 00 a 2017-01-02.13: 00: 00 (24 horas)
+e imprimi-los para consola
+E também carregá-los para outra tabela MySQL com comentários sobre por que está bloqueado.
 
 SQL
 ---
 
 (1) Escreva a consulta do MySQL para encontrar IPs que façam mais de um certo número de solicitações para um determinado período de tempo.
-
-    Ex: escreva SQL para encontrar IPs que fizeram mais de 100 pedidos a partir de 2017-01-01.13: 00: 00 a 2017-01-01.14: 00: 00.
+Ex: escreva SQL para encontrar IPs que fizeram mais de 100 pedidos a partir de 2017-01-01.13: 00: 00 a 2017-01-01.14: 00: 00.
 
 (2) Escreva a consulta do MySQL para encontrar pedidos feitos por um determinado IP.
- 
 
 Formato LOG
 ----------

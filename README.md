@@ -6,5 +6,6 @@ This project contains the source code of Smart Parser
 * Web.
 * Java Persistence API.
 * MySQL and Flyway Database Migrations library.
+* HyperSQL Database.
 * Gradle.
 * JUnit.
