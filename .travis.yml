@@ -1,2 +1,2 @@
 language: java
-./gradlew build
+install: gradlew build
