@@ -66,8 +66,10 @@ public class ParserLogTest {
 
     @Test
     public void putArgsInMaps_withParametersInvalid_notInputMap() {
-        parserLog.putArgsInMaps("=");
         Map<String, String> maps = parserLog.getMaps();
-        assertThat(maps.size(), Matchers.equalTo(0));
+        int sizeBefore = maps.size();
+        parserLog.putArgsInMaps("=");
+        int sizeAfter = maps.size();
+        assertThat(sizeBefore, Matchers.equalTo(sizeAfter));
     }
 }
