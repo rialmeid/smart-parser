@@ -32,11 +32,13 @@ public class ParserLog {
     }
 
     protected void putArgsInMaps(String arg) {
-        String[] split = arg.split("=");
-        if (split.length == 2) {
-            String key = split[0].replace("--", "");
-            String value = split[1];
-            maps.put(key, value);
+        if (arg != null) {
+            String[] split = arg.split("=");
+            if (split.length == 2) {
+                String key = split[0].replace("--", "");
+                String value = split[1];
+                maps.put(key, value);
+            }
         }
     }
 
