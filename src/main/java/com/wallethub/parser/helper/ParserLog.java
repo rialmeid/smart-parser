@@ -5,6 +5,13 @@ import java.util.Map;
 
 public class ParserLog {
 
+    public static final String DELIMITER_ARGS = "=";
+    public static final String INDICATOR_ARGS = "--";
+    public static final String EMPTY_STRING = "";
+    public static final int INDEX_KEY_ARGS = 0;
+    public static final int INDEX_VALUE_ARGS = 1;
+    public static final int MAXSIZE_ARGS = 2;
+
     private final String[] args;
 
     private Map<String, String> maps;
@@ -22,21 +29,17 @@ public class ParserLog {
 
     protected void initMap() {
         maps = new HashMap<String, String>();
-        String key;
-        String value;
-
         for (String arg : args) {
             putArgsInMaps(arg);
         }
-
     }
 
     protected void putArgsInMaps(String arg) {
         if (arg != null) {
-            String[] split = arg.split("=");
-            if (split.length == 2) {
-                String key = split[0].replace("--", "");
-                String value = split[1];
+            String[] split = arg.split(DELIMITER_ARGS);
+            if (split.length == MAXSIZE_ARGS) {
+                String key = split[INDEX_KEY_ARGS].replace(INDICATOR_ARGS, EMPTY_STRING);
+                String value = split[INDEX_VALUE_ARGS];
                 maps.put(key, value);
             }
         }
