@@ -73,3 +73,7 @@ Entregáveis
 (3) Esquema MySQL usado para os dados do registro
 
 (4) consultas SQL para teste SQL
+
+
+
+https://spring.io/guides/gs/batch-processing/
