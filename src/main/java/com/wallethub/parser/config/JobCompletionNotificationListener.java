@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobParameter;
+import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.listener.JobExecutionListenerSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class JobCompletionNotificationListener extends JobExecutionListenerSupport {
@@ -23,9 +26,17 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
 
     private final JdbcTemplate jdbcTemplate;
 
+    private Map<String, JobParameter> parameters;
+
     @Autowired
     public JobCompletionNotificationListener(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public void beforeJob(JobExecution jobExecution) {
+        JobParameters jobParameters = jobExecution.getJobParameters();
+        parameters = jobParameters.getParameters();
     }
 
     @Override
@@ -55,5 +66,9 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
                 JobCompletionNotificationListener.log.info("Found <" + log + "> in the database.");
             }
         }
+    }
+
+    public Map<String, JobParameter> getParameters() {
+        return parameters;
     }
 }
